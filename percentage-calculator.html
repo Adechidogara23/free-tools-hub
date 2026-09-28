@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percentage Calculator - Free Online Percent Calculator</title>
+<meta name="description" content="Calculate percentages instantly. Find X% of Y, what percent X is of Y, and percentage increase or decrease. Free online tool.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #1a202c; line-height: 1.6; padding: 0 16px; }
+header { max-width: 720px; margin: 0 auto; padding: 32px 0 16px; text-align: center; }
+header h1 { font-size: 1.6rem; margin-bottom: 8px; }
+header p { color: #4a5568; font-size: 0.95rem; }
+.container { max-width: 720px; margin: 0 auto; }
+.card { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.card h2 { font-size: 1.1rem; margin-bottom: 14px; color: #2d3748; }
+.calc-row { display: grid; grid-template-columns: auto 1fr auto 1fr auto; gap: 8px; align-items: center; margin-bottom: 12px; }
+.calc-row.three { grid-template-columns: auto 1fr auto 1fr; }
+input[type="number"] { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 1rem; min-width: 0; }
+input[type="number"]:focus { border-color: #3182ce; outline: none; }
+.label-text { font-size: 0.9rem; color: #4a5568; white-space: nowrap; }
+.result { background: #ebf8ff; border-radius: 8px; padding: 14px; font-size: 1rem; font-weight: 600; color: #2b6cb0; text-align: center; margin-top: 8px; min-height: 46px; display: flex; align-items: center; justify-content: center; }
+.btn { background: #3182ce; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+.btn:hover { background: #2b6cb0; }
+.ad-slot { background: #edf2f7; border: 1px dashed #cbd5e0; border-radius: 8px; padding: 20px; text-align: center; color: #a0aec0; font-size: 0.8rem; margin: 20px 0; }
+.guide { margin-top: 32px; }
+.guide h2 { font-size: 1.2rem; margin-bottom: 12px; }
+.guide h3 { font-size: 1rem; margin: 16px 0 8px; }
+.guide p, .guide li { color: #4a5568; font-size: 0.92rem; }
+.guide ul { padding-left: 20px; margin-bottom: 12px; }
+footer { text-align: center; padding: 32px 0; color: #a0aec0; font-size: 0.85rem; }
+footer a { color: #3182ce; text-decoration: none; margin: 0 8px; }
+@media (max-width: 500px) {
+  .calc-row { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .calc-row .label-text { grid-column: span 2; }
+  .calc-row.three { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Percentage Calculator</h1>
+  <p>Three quick calculators: find X% of Y, what % X is of Y, and % change.</p>
+  <nav style="margin-top: 16px;">
+    <a href="index.html" style="margin: 0 4px; color: #3182ce; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Image Compressor</a>
+    <a href="qr-generator.html" style="margin: 0 4px; color: #3182ce; text-decoration: none; font-weight: 600; font-size: 0.85rem;">QR Generator</a>
+    <a href="word-counter.html" style="margin: 0 4px; color: #3182ce; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Word Counter</a>
+    <a href="age-calculator.html" style="margin: 0 4px; color: #3182ce; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Age Calculator</a>
+    <a href="invoice-generator.html" style="margin: 0 4px; color: #3182ce; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Invoice</a>
+    <a href="password-generator.html" style="margin: 0 4px; color: #3182ce; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Password</a>
+    <a href="percentage-calculator.html" style="margin: 0 4px; color: #3182ce; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Percentage</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <div class="ad-slot">Ad space</div>
+
+  <div class="card">
+    <h2>What is X% of Y?</h2>
+    <div class="calc-row">
+      <span class="label-text">What is</span>
+      <input type="number" id="a1" placeholder="20">
+      <span class="label-text">% of</span>
+      <input type="number" id="b1" placeholder="150">
+      <button class="btn" onclick="calc1()">=</button>
+    </div>
+    <div class="result" id="r1">Result will appear here</div>
+  </div>
+
+  <div class="card">
+    <h2>X is what percent of Y?</h2>
+    <div class="calc-row">
+      <span class="label-text">What % is</span>
+      <input type="number" id="a2" placeholder="30">
+      <span class="label-text">of</span>
+      <input type="number" id="b2" placeholder="150">
+      <button class="btn" onclick="calc2()">=</button>
+    </div>
+    <div class="result" id="r2">Result will appear here</div>
+  </div>
+
+  <div class="card">
+    <h2>Percentage Increase / Decrease</h2>
+    <div class="calc-row three">
+      <span class="label-text">From</span>
+      <input type="number" id="a3" placeholder="100">
+      <span class="label-text">to</span>
+      <input type="number" id="b3" placeholder="150">
+      <button class="btn" onclick="calc3()">=</button>
+    </div>
+    <div class="result" id="r3">Result will appear here</div>
+  </div>
+
+  <div class="ad-slot">Ad space</div>
+
+  <div class="guide">
+    <h2>How to Use the Percentage Calculator</h2>
+    <p>This tool answers three common percentage questions:</p>
+    <ul>
+      <li><strong>What is X% of Y?</strong> Example: What is 20% of 150? Answer: 30</li>
+      <li><strong>X is what percent of Y?</strong> Example: 30 is what percent of 150? Answer: 20%</li>
+      <li><strong>Percentage change:</strong> Example: From 100 to 150 = 50% increase</li>
+    </ul>
+
+    <h3>Common Percentage Formulas</h3>
+    <p><strong>X% of Y = (X ÷ 100) × Y</strong></p>
+    <p><strong>X is what % of Y = (X ÷ Y) × 100</strong></p>
+    <p><strong>% change = ((New − Old) ÷ Old) × 100</strong></p>
+
+    <h3>When You'll Need This</h3>
+    <ul>
+      <li>Calculating discounts while shopping</li>
+      <li>Working out tips at restaurants</li>
+      <li>Figuring out tax amounts</li>
+      <li>Tracking weight loss or business growth</li>
+      <li>Analyzing statistics and data</li>
+      <li>Solving math homework</li>
+    </ul>
+
+    <h3>Frequently Asked Questions</h3>
+    <p><strong>Is this tool free?</strong> Yes, completely free with no signup.</p>
+    <p><strong>Does it work on mobile?</strong> Yes, the tool is designed for phones first.</p>
+    <p><strong>Is my data stored?</strong> No. Everything is calculated in your browser and never sent anywhere.</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>&copy; <span id="year"></span> Free Tools Hub</p>
+  <p>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+  </p>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+function fmt(n) {
+  return Number.isInteger(n) ? n.toString() : n.toFixed(2).replace(/\.?0+$/, '');
+}
+
+function calc1() {
+  const a = parseFloat(document.getElementById('a1').value);
+  const b = parseFloat(document.getElementById('b1').value);
+  const r = document.getElementById('r1');
+  if (isNaN(a) || isNaN(b)) { r.textContent = 'Enter both numbers'; return; }
+  r.textContent = fmt(a) + '% of ' + fmt(b) + ' = ' + fmt((a / 100) * b);
+}
+
+function calc2() {
+  const a = parseFloat(document.getElementById('a2').value);
+  const b = parseFloat(document.getElementById('b2').value);
+  const r = document.getElementById('r2');
+  if (isNaN(a) || isNaN(b) || b === 0) { r.textContent = 'Enter valid numbers (Y cannot be 0)'; return; }
+  r.textContent = fmt(a) + ' is ' + fmt((a / b) * 100) + '% of ' + fmt(b);
+}
+
+function calc3() {
+  const a = parseFloat(document.getElementById('a3').value);
+  const b = parseFloat(document.getElementById('b3').value);
+  const r = document.getElementById('r3');
+  if (isNaN(a) || isNaN(b) || a === 0) { r.textContent = 'Enter valid numbers (Old cannot be 0)'; return; }
+  const change = ((b - a) / Math.abs(a)) * 100;
+  const word = change >= 0 ? 'increase' : 'decrease';
+  r.textContent = 'From ' + fmt(a) + ' to ' + fmt(b) + ' = ' + fmt(Math.abs(change)) + '% ' + word;
+}
+</script>
+
+</body>
+                                                             </html>
